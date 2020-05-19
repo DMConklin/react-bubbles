@@ -27,6 +27,7 @@ const ColorList = ({ colors, update }) => {
         .then(() => {
             update(true);
             setEditing(false);
+            setColorToEdit(initialColor);
         })
         .catch(err => console.log(err))
   };
@@ -47,6 +48,7 @@ const ColorList = ({ colors, update }) => {
             .post('/colors', colorToEdit)
             .then(() => {
                 update(true);
+                setColorToEdit(initialColor);
             })
             .catch(err => console.log(err))
     }
