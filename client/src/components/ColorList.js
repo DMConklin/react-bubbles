@@ -10,8 +10,6 @@ const ColorList = ({ colors, update }) => {
   const [editing, setEditing] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
 
-  console.log(colorToEdit);
-
   const editColor = color => {
     setEditing(true);
     setColorToEdit(color);
