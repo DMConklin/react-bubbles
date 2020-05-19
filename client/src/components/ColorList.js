@@ -6,7 +6,7 @@ const initialColor = {
   code: { hex: "" }
 };
 
-const ColorList = ({ colors, update }) => {
+const ColorList = ({ colors, setUpdate, update }) => {
   const [editing, setEditing] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
 
@@ -23,7 +23,7 @@ const ColorList = ({ colors, update }) => {
     axiosWithAuth()
         .put(`colors/${colorToEdit.id}`, colorToEdit)
         .then(() => {
-            update(true);
+            setUpdate(true);
             setEditing(false);
             setColorToEdit(initialColor);
         })
@@ -35,7 +35,7 @@ const ColorList = ({ colors, update }) => {
     axiosWithAuth()
         .delete(`colors/${colorToDelete.id}`)
         .then(() => { 
-            update(true);
+            setUpdate(true);
         })
         .catch(err => console.log(err))
     };
@@ -45,7 +45,7 @@ const ColorList = ({ colors, update }) => {
         axiosWithAuth()
             .post('/colors', colorToEdit)
             .then(() => {
-                update(true);
+                setUpdate(true);
                 setColorToEdit(initialColor);
             })
             .catch(err => console.log(err))
@@ -74,7 +74,8 @@ const ColorList = ({ colors, update }) => {
           </li>
         ))}
       </ul>
-      
+        {update ? <p>Updating Color List ...</p> : null}
+        {console.log(update)}
         <form onSubmit={editing ? saveEdit : addColor}>
           <legend>{editing ? 'edit' : 'add'} color</legend>
           <label>
